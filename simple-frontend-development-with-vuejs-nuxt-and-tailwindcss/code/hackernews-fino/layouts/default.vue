@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-gray-100 h-screen">
     <header class="bg-yellow-300">
       <nav role="navigation" class="flex py-4 px-8 md:w-4/6 w-full mx-auto leading-6">
         <nuxt-link to="/" exact class="mr-4">

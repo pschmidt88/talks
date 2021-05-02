@@ -1,70 +1,46 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">hackernews-fino</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="bg-white md:w-4/6 w-full mx-auto mt-4 rounded">
+    <post v-for="(post, index) in posts" :key="index" :post="post" />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@vue/composition-api'
+import Post from '~/components/Post.vue'
 
-export default Vue.extend({})
+export default defineComponent({
+  components: { Post },
+  setup() {
+    const posts = [{
+      id: "27011013",
+      user: "textread",
+      points: 247,
+      time: "1619912798",
+      url: "https://arxiv.org/abs/2004.02504",
+      title: "Bringing GNU Emacs to Native Code (2020)",
+      comments_count: 16
+    },
+    {
+      id: "27012687",
+      user: "rmason",
+      points: 41,
+      time: "1619935285",
+      url: "https://www.secondwavemedia.com/epicenter/features/local-asphalt-company-paves-recycled-plastic-roads.aspx",
+      title: "Michigan asphalt company paves first US public roads containing recycled plastic",
+      comments_count: 9
+    },
+    {
+      id: "27010556",
+      user: "todsacerdoti",
+      points: 198,
+      time: "1619908980",
+      url: "https://linmob.net/will-linux-phones-stay-around-this-time/",
+      title: "Will Linux phones stay around this time?",
+      comments_count: 35
+    },
+    ]
+
+    return { posts }
+  },
+})
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
