@@ -7,7 +7,7 @@
     <div class="flex flex-col w-11/12">
       <span>
         <a :href="post.url" target="_blank">{{ post.title }}</a>
-        <span>({{ post.url | host }})</span>
+        <span>({{ host }})</span>
       </span>
       <span class="text-sm text-gray-600">
         <span>
@@ -29,6 +29,19 @@ export default defineComponent({
     props: [
         'post'
     ],
+    computed: {
+      host(): string {
+        const host = post.url
+          .replace(/^https?:\/\//, '')
+          .replace(/\/.*$/, '')
+          .replace('?id=', '/')
+        const parts = host.split('.').slice(-3)
+        if (parts[0] === 'www') {
+          parts.shift()
+        }
+        return parts.join('.')
+      }
+    },
     setup() {
     },
 })

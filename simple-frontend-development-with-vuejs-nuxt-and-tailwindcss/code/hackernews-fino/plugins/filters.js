@@ -30,12 +30,3 @@ function pluralize(time, label) {
   return time + label + 's'
 }
 
-const filters = {
-  host,
-  timeAgo,
-}
-export default filters
-
-Object.keys(filters).forEach((key) => {
-  Vue.filter(key, filters[key])
-})
