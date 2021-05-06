@@ -3,7 +3,7 @@
     <header class="bg-yellow-300">
       <nav role="navigation" class="flex py-4 px-8 md:w-4/6 w-full mx-auto leading-6">
         <nuxt-link to="/" exact class="mr-4">
-          <img src="~/assets/logo.svg" alt="logo" class="w-8 mr-6">
+          <fino-logo class="w-8 mr-6" />
         </nuxt-link>
 
         <nuxt-link class="md:mr-6 mr-4" 
@@ -26,9 +26,11 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 
+import FinoLogo from '~/components/FinoLogo.vue'
+
 export default defineComponent({
+  components: { FinoLogo },
   setup() {
-    
     const headerLinks = [
       { link: "/news", label: "News" },
       { link: "/newest", label: "Newest" },
