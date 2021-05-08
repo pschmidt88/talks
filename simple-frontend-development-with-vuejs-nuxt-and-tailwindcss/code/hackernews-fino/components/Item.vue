@@ -7,7 +7,7 @@
     <div class="flex flex-col w-11/12">
       <span>
         <a :href="post.url" target="_blank">{{ post.title }}</a>
-        <span class="font-light">({{ host }})</span>
+        <span class="font-light" v-if="host.length > 0">({{ host }})</span>
       </span>
       <span class="text-sm text-gray-600">
         <span>
@@ -43,14 +43,14 @@ export default defineComponent({
   },
   computed: {
     commentCount(): number {
-        return this.post.kids ? Object.values(this.post.kids).length : 0
+      return this.post.kids ? Object.values(this.post.kids).length : 0
     },
     host(): string {
-      const host = this.post.url!!
-        .replace(/^https?:\/\//, '')
+      const url = this.post.url ? this.post.url : ""
+      const host = url.replace(/^https?:\/\//, '')
         .replace(/\/.*$/, '')
         .replace('?id=', '/')
-      const parts = host.split('.').slice(-3)
+      const parts = host?.split('.').slice(-3)
       if (parts[0] === 'www') {
         parts.shift()
       }
