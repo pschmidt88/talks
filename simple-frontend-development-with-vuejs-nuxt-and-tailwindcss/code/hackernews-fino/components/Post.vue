@@ -23,11 +23,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType } from '@vue/composition-api'
+import { defineComponent, PropType } from '@vue/composition-api'
 
 type Post = {
   url: string
   time: string
+  id: string,
+  user: string,
+  points: number,
+  title: string,
+  comments_count: number
 }
 
 export default defineComponent({
