@@ -1,22 +1,22 @@
 <template>
   <div class="p-4 border-b leading-6 border-gray-100 flex items-center">
     <div class="text-xl font-bold mr-4 w-1/12 text-center">
-      {{ post.points }}
+      {{ post.score }}
     </div>
 
     <div class="flex flex-col w-11/12">
       <span>
         <a :href="post.url" target="_blank">{{ post.title }}</a>
-        <span>({{ host }})</span>
+        <span class="font-light">({{ host }})</span>
       </span>
       <span class="text-sm text-gray-600">
         <span>
           by user
-          <span class="underline">{{ post.user }}</span>
+          <span class="underline">{{ post.by }}</span>
         </span>
 
         <span> {{ timeAgo }} ago </span>
-        <span class="border-l pl-1"> {{ post.comments_count }} comments </span>
+        <span class="border-l pl-1"> {{ commentCount }} comments </span>
       </span>
     </div>
   </div>
@@ -24,21 +24,12 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api'
-
-type Post = {
-  url: string
-  time: string
-  id: string,
-  user: string,
-  points: number,
-  title: string,
-  comments_count: number
-}
+import { Item } from '~/server/api/items'
 
 export default defineComponent({
   props: {
     post: {
-      type: Object as PropType<Post>,
+      type: Object as PropType<Item>,
       required: true,
     },
   },
@@ -51,8 +42,11 @@ export default defineComponent({
     },
   },
   computed: {
+    commentCount(): number {
+        return this.post.kids ? Object.values(this.post.kids).length : 0
+    },
     host(): string {
-      const host = this.post.url
+      const host = this.post.url!!
         .replace(/^https?:\/\//, '')
         .replace(/\/.*$/, '')
         .replace('?id=', '/')
