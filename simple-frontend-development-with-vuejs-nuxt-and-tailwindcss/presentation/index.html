@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/solarized.css" id="theme">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Frontend for Backenders #2</h1>
+				<span>Rapid UI Development with Vue.js on Nuxt & TailwindCSS</span>
+			</section>
+
+
+			<section>
+				<h2>Agenda</h2>
+
+				<ol>
+					<li>Motivation</li>
+					<li>Kurzes Intro zu verwendeten Technologien
+						<ul>
+							<li>Vue.js</li>
+							<li>Nuxt.js</li>
+							<li>TailwindCSS</li>
+						</ul>
+					</li>
+					<li>Demo / Live Coding</li>
+				</ol>
+			</section>
+
+
+			<section>
+				<h3>Motivation</h3>
+
+				<ul>
+					<li class="fragment">Jokos Talk</li>
+					<li class="fragment">
+						Früher Frontends mit Java gebaut
+						<img src="https://media.giphy.com/media/CDJo4EgHwbaPS/giphy.gif" alt="wait what">
+					</li>
+					<li class="fragment">Beschäftige mich in der Freitzeit mit Vue.js</li>
+					<li class="fragment">Finde die Technologien cool und will das einfach mit euch teilen</li>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Vue.js</h3>
+
+
+			</section>
+
+			<section>
+				<h3>Nuxt.js</h3>
+
+				<section>
+					<div>Framework auf Vue.js</div>
+
+					<img src="https://i.imgur.com/IdtYcjj.png" alt="yo dawg">
+				</section>
+
+				<section>
+					Nimmt Arbeit ab, die mit "Vanilla" Vue.js lästig, komplex oder repetetiv sind
+
+					<ul>
+						<li>Routing</li>
+						<li>SSR (Server Side Rendering)</li>
+						<li>verschieden Konfigurationen: webpack, SCSS/SASS, etc...</li>
+						<li>Application State (Store)</li>
+						<li>...</li>
+					</ul>
+				</section>
+
+				<section>
+					<div>Ergänzende Module "ready-to-use" für typische Frontend Funktionalität</div>
+
+					<ul>
+						<li>Http Client</li>
+						<li>Proxy</li>
+						<li>ESLint</li>
+						<li>i18n</li>
+						<li>PWA</li>
+						<li>Google Analytics</li>
+						<li>...</li>
+					</ul>
+				</section>
+			</section>
+
+
+			<section>
+				<h3>TailwindCSS</h3>
+
+				<section>
+					Utility first CSS Framework
+
+					<div>
+						<img src="https://media.giphy.com/media/QjIz1AqkGTszK/giphy.gif" alt="" class="fragment">
+					</div>
+				</section>
+
+				<section>
+					<img src="https://i.imgur.com/4QwYgjX.png" alt="">
+
+					<pre><code data-trim>
+					<div class="chat-notification">
+					  <div class="chat-notification-logo-wrapper">
+					    <img class="chat-notification-logo" src="/img/logo.svg" alt="ChitChat Logo">
+					  </div>
+					  <div class="chat-notification-content">
+					    <h4 class="chat-notification-title">ChitChat</h4>
+					    <p class="chat-notification-message">You have a new message!</p>
+					  </div>
+					</div>
+						</code></pre>
+				</section>
+
+				<section>
+					<img src="https://i.imgur.com/4QwYgjX.png" alt="">
+					<pre><code data-trim>
+						.chat-notification {
+							display: flex;
+							max-width: 24rem;
+							margin: 0 auto;
+							padding: 1.5rem;
+							border-radius: 0.5rem;
+							background-color: #fff;
+							box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+						  }
+						  .chat-notification-logo-wrapper {
+							flex-shrink: 0;
+						  }
+						  .chat-notification-logo {
+							height: 3rem;
+							width: 3rem;
+						  }
+						  .chat-notification-content {
+							margin-left: 1.5rem;
+							padding-top: 0.25rem;
+						  }
+						  .chat-notification-title {
+							color: #1a202c;
+							font-size: 1.25rem;
+							line-height: 1.25;
+						  }
+						  .chat-notification-message {
+							color: #718096;
+							font-size: 1rem;
+							line-height: 1.5;
+						  }
+					</code></pre>
+				</section>
+
+				<section>
+					<ul>
+
+						<li>CSS schreiben & maintainen
+							<ul>
+								<li>Mehr Komponenten -> Mehr CSS</li>
+								<li>Größere CSS Datei -> längere Downloadzeiten</li>
+								<li>schon mal ein 30k Lines großes CSS maintained?</li>
+							</ul>
+						</li>
+					<li>Klassen(namen) ausdenken
+
+					<ul>
+						<li>Keine Reusability</li>
+						<li>Wenn man es reusable machen will, muss man ordentlich Gehirnschmalz reinstecken</li>
+						<li>Bei Änderung: Gefahr andere Komponenten kaputt zu machen</li>
+					</ul>
+					</li>
+
+					
+					
+					</ul>
+				</section>
+
+				<section>
+					<div>Tailwind to the rescue</div>
+					
+					<img src="https://media.giphy.com/media/mv2oHmVjhdOK6LFRZX/giphy.gif" alt="">
+
+					<div class="fragment">Vordefinierte Utility Klassen statt Komponenten</div>
+				</section>
+
+				<section>
+					<img src="https://i.imgur.com/4QwYgjX.png" alt="">
+					<pre><code data-trim>
+					<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+					  <div class="flex-shrink-0">
+					    <img class="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo">
+					  </div>
+					  <div>
+					    <div class="text-xl font-medium text-black">ChitChat</div>
+						  <p class="text-gray-500">You have a new message!</p>
+					  </div>
+					</div>
+					</code></pre>
+				</section>
+
+				<section>
+					Vorteile
+					<ul>
+						<li>Kein CSS selber schreiben</li>
+						<li>Keine Klassen(namen) mehr ausdenken müssen</li>
+						<li>Änderungen betreffen nur die ausgewählte Komponente, nicht automatisch alle anderen</li>
+					</ul>
+				</section>
+			</section>
+
+
+			<section>
+				<h3>Demo / Live Coding</h3>
+
+				<div class="fragment">ToDo Listen sind out</div> 
+				
+				<div class="fragment">
+					<img src="https://www.deutsche-startups.de/wp-content/uploads/2013/04/ds_hackernews_shot.jpg" alt="hackernews">
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
