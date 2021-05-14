@@ -1,39 +1,37 @@
 <template>
-  <div class="p-4 border-b leading-6 flex items-center">
+  <div class="p-4 border-b leading-6 border-gray-100 flex items-center">
     <div class="text-xl font-bold mr-4 w-1/12 text-center">
-      {{ item.score }}
+      {{ post.score }}
     </div>
 
     <div class="flex flex-col w-11/12">
       <span>
-        <a :href="item.url" target="_blank">
-          {{ item.title }}
-        </a>
-        <span class="font-light" v-if="hasComments">({{ host }})</span>
+        <a :href="post.url" target="_blank">{{ post.title }}</a>
+        <span class="font-light" v-if="host.length > 0">({{ host }})</span>
       </span>
-
       <span class="text-sm text-gray-600">
         <span>
           by user
-          <span class="underline">{{ item.by }}</span>
+          <span class="underline">{{ post.by }}</span>
         </span>
 
-        <span>{{ timeAgo }} ago</span>
-        <span class="border-l pl-1">{{ commentCount }} comments</span>
+        <span> {{ timeAgo }} ago </span>
+        <span class="border-l pl-1"> {{ commentCount }} comments </span>
       </span>
-
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
+import { defineComponent, PropType } from '@vue/composition-api'
+import { Item } from '~/server/api/items'
+
+export default defineComponent({
   props: {
-    item: {
-      type: Object,
-      required: true
-    }
+    post: {
+      type: Object as PropType<Item>,
+      required: true,
+    },
   },
   methods: {
     pluralize(time: number, label: string) {
@@ -44,14 +42,11 @@ export default Vue.extend({
     },
   },
   computed: {
-    hasComments(): boolean {
-      return this.host.length > 0
-    },
-    commentCount(): Number {
-      return this.item.kids ? this.item.kids.length : 0
+    commentCount(): number {
+      return this.post.kids ? Object.values(this.post.kids).length : 0
     },
     host(): string {
-      const url = this.item.url ? this.item.url : ""
+      const url = this.post.url ? this.post.url : ""
       const host = url.replace(/^https?:\/\//, '')
         .replace(/\/.*$/, '')
         .replace('?id=', '/')
@@ -62,7 +57,7 @@ export default Vue.extend({
       return parts.join('.')
     },
     timeAgo(): string {
-      const between = Date.now() / 1000 - Number(this.item.time)
+      const between = Date.now() / 1000 - Number(this.post.time)
       if (between < 3600) {
         return this.pluralize(~~(between / 60), ' minute')
       } else if (between < 86400) {
@@ -71,6 +66,8 @@ export default Vue.extend({
         return this.pluralize(~~(between / 86400), ' day')
       }
     },
-  }
+  },
+  setup() {},
 })
 </script>
+

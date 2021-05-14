@@ -1,48 +1,41 @@
 <template>
-  <div class="bg-gray-100 h-screen">
+  <div class="bg-gray-100 min-h-screen">
     <header class="bg-yellow-300">
-      <nav
-        role="navigation"
-        class="flex py-4 px-8 md:w-4/6 w-full mx-auto leading-6"
-      >
-        <nuxt-link to="/" exact class="mr-4">
-          <fino-logo class="w-8 mr-6" />
+      <nav class="flex md:w-4/6 w-full py-4 px-8 mx-auto leading-8">
+        <nuxt-link to="/">
+          <Logo class="h-8 w-8 mr-6" />
         </nuxt-link>
 
         <nuxt-link
-          class="md:mr-6 mr-4"
           v-for="link in headerLinks"
           :key="link.label"
-          :to="link.link"
+          :to="link.url"
+          class="mr-6"
         >
           {{ link.label }}
         </nuxt-link>
       </nav>
     </header>
 
-    <main>
-      <Nuxt role="main" />
-    </main>
+    <div>
+      <Nuxt />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-
-import FinoLogo from '~/components/FinoLogo.vue'
-
-export default defineComponent({
-  components: { FinoLogo },
-  setup() {
-    const headerLinks = [
-      { link: '/topstories', label: 'News' },
-      { link: '/newstories', label: 'Newest' },
-      { link: '/askstories', label: 'Ask' },
-      { link: '/showstories', label: 'Show' },
-      { link: '/jobstories', label: 'Jobs' },
-    ]
-
-    return { headerLinks }
+import Vue from 'vue'
+export default Vue.extend({
+  data() {
+    return {
+      headerLinks: [
+        { label: 'New', url: '/topstories' },
+        { label: 'Newest', url: '/newstories' },
+        { label: 'Ask', url: '/askstories' },
+        { label: 'Show', url: '/showstories' },
+        { label: 'Job', url: '/jobstories' },
+      ],
+    }
   },
 })
 </script>

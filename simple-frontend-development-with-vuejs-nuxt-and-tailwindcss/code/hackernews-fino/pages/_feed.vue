@@ -1,27 +1,24 @@
 <template>
-  <div class="bg-white md:w-4/6 w-full mx-auto mt-4 rounded">
-    <post v-for="(item, index) in items" :key="index" :post="item" />
+  <div class="w-4/6 mx-auto bg-white rounded mt-4">
+    <item v-for="item in items" :key="item.id" :item="item" />
   </div>
 </template>
 
 <script lang="ts">
-import { useFetch, useRoute, defineComponent, ref } from '@nuxtjs/composition-api'
-import Post from '~/components/Item.vue'
-import { fetchFeed } from '~/server/api/feeds'
-import { Item } from '~/server/api/items'
+import Vue from 'vue'
+import { fetchFeed } from '~/api/hackernews'
+import Item from '~/components/Item.vue'
 
-export default defineComponent({
-  components: { Post },
-  setup() {
-    const items = ref<Item[]>([])
-    const route = useRoute()
-
-    useFetch(async () => {
-      const { feed } = route.value.params
-      items.value = await fetchFeed(feed)
-    })
-
-    return { items }
+export default Vue.extend({
+  components: { Item },
+  data() {
+    return {
+      items: []
+    }
+  },
+  async fetch() {
+    const { feed } = this.$route.params
+    this.items = await fetchFeed(feed)
   }
 })
 </script>

@@ -1,4 +1,4 @@
-# fino-hackernew-clone
+# hackernews-fino
 
 ## Build Setup
 
